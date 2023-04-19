@@ -1,5 +1,6 @@
 package com.jaoafonso.testebackend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -22,6 +23,7 @@ public class VendedorModel implements Serializable {
     @Column(name = "vendedor_nome")
     private String nome;
     @OneToMany(mappedBy = "vendedor")
+    @JsonIgnore
     private Set<VendaModel> vendas = new HashSet<>();
 
     public VendedorModel() {
