@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -20,7 +20,7 @@ public class VendaModel implements Serializable {
     @Column(name = "venda_id")
     private Long id;
     @Column(name = "venda_data")
-    private Instant dataVenda;
+    private LocalDate dataVenda;
     @Column(name = "venda_valor", precision = 20, scale = 2)
     private BigDecimal valor;
     @ManyToOne
@@ -30,7 +30,7 @@ public class VendaModel implements Serializable {
     public VendaModel() {
     }
 
-    public VendaModel(Long id, Instant dataVenda, BigDecimal valor, VendedorModel vendedor) {
+    public VendaModel(Long id, LocalDate dataVenda, BigDecimal valor, VendedorModel vendedor) {
         this.id = id;
         this.dataVenda = dataVenda;
         this.valor = valor;
@@ -45,11 +45,11 @@ public class VendaModel implements Serializable {
         this.id = id;
     }
 
-    public Instant getDataVenda() {
+    public LocalDate getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(Instant dataVenda) {
+    public void setDataVenda(LocalDate dataVenda) {
         this.dataVenda = dataVenda;
     }
 
