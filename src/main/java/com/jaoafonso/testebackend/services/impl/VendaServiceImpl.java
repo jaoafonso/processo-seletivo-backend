@@ -7,7 +7,6 @@ import com.jaoafonso.testebackend.models.VendedorModel;
 import com.jaoafonso.testebackend.repositories.VendaRepository;
 import com.jaoafonso.testebackend.repositories.VendedorRepository;
 import com.jaoafonso.testebackend.services.VendaService;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,7 +23,6 @@ public class VendaServiceImpl implements VendaService {
     }
 
     @Override
-    @Transactional
     public VendaModel salvar(VendaDTO dto) {
         Long idVendedor = dto.getVendedor();
         VendedorModel vendedor =vendedorRepository

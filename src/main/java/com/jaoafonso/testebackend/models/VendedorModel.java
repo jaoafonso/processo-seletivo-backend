@@ -2,6 +2,7 @@ package com.jaoafonso.testebackend.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class VendedorModel implements Serializable {
     @Column(name = "vendedor_id")
     private Long id;
     @Column(name = "vendedor_nome")
+    @NotBlank(message = "Informe o nome do vendedor.")
     private String nome;
     @OneToMany(mappedBy = "vendedor")
     @JsonIgnore

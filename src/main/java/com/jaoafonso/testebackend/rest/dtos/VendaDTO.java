@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 
 public class VendaDTO {
 
-    @NotNull
+    @NotNull(message = "Informe o valor da venda.")
     private BigDecimal valor;
-    @NotNull
+    @NotNull(message = "Informe o ID do vendedor.")
     private Long vendedor;
 
     public VendaDTO() {
