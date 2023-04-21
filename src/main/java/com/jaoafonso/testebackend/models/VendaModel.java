@@ -27,7 +27,7 @@ public class VendaModel implements Serializable {
     private BigDecimal valor;
 
     @ManyToOne
-    @JoinColumn(name = "vendedor_id")
+    @JoinColumn(name = "vendedor_id", nullable = false)
     private VendedorModel vendedor;
 
     public VendaModel() {
