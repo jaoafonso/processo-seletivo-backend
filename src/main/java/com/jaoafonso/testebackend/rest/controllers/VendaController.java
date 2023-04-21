@@ -22,7 +22,6 @@ public class VendaController {
     @PostMapping
     @ResponseStatus(CREATED)
     public VendaModel salvar(@RequestBody @Valid VendaDTO dto) {
-        VendaModel venda = service.salvar(dto);
-        return venda;
+        return service.salvar(dto);
     }
 }

@@ -34,7 +34,6 @@ public class VendedorController {
     @ResponseStatus(OK)
     public List<VendedorDTO> listar(@RequestParam("dataInicial") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicial,
                                     @RequestParam("dataFinal") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFinal) {
-        List<VendedorDTO> list = service.listar(dataInicial, dataFinal);
-        return list;
+        return service.listar(dataInicial, dataFinal);
     }
 }
