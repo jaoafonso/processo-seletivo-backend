@@ -21,9 +21,11 @@ public class VendedorModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vendedor_id")
     private Long id;
-    @Column(name = "vendedor_nome")
+
+    @Column(name = "vendedor_nome", nullable = false, length = 100)
     @NotBlank(message = "Informe o nome do vendedor.")
     private String nome;
+
     @OneToMany(mappedBy = "vendedor")
     @JsonIgnore
     private Set<VendaModel> vendas = new HashSet<>();
@@ -61,13 +63,16 @@ public class VendedorModel implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        VendedorModel vendedor = (VendedorModel) o;
+        VendedorModel that = (VendedorModel) o;
 
-        return Objects.equals(id, vendedor.id);
+        if (!Objects.equals(id, that.id)) return false;
+        return Objects.equals(nome, that.nome);
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (nome != null ? nome.hashCode() : 0);
+        return result;
     }
 }

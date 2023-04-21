@@ -2,6 +2,8 @@ package com.jaoafonso.testebackend.rest.dtos;
 
 import com.jaoafonso.testebackend.models.VendedorModel;
 
+import java.util.Objects;
+
 public class VendedorDTO {
 
     private VendedorModel vendedor;
@@ -39,5 +41,25 @@ public class VendedorDTO {
 
     public void setMediaVendas(Double mediaVendas) {
         this.mediaVendas = mediaVendas;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        VendedorDTO that = (VendedorDTO) o;
+
+        if (!Objects.equals(vendedor, that.vendedor)) return false;
+        if (!Objects.equals(totalVendas, that.totalVendas)) return false;
+        return Objects.equals(mediaVendas, that.mediaVendas);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = vendedor != null ? vendedor.hashCode() : 0;
+        result = 31 * result + (totalVendas != null ? totalVendas.hashCode() : 0);
+        result = 31 * result + (mediaVendas != null ? mediaVendas.hashCode() : 0);
+        return result;
     }
 }

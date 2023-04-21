@@ -19,10 +19,13 @@ public class VendaModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "venda_id")
     private Long id;
-    @Column(name = "venda_data")
+
+    @Column(name = "venda_data", nullable = false)
     private LocalDate dataVenda;
-    @Column(name = "venda_valor", precision = 20, scale = 2)
+
+    @Column(name = "venda_valor", nullable = false, precision = 20, scale = 2)
     private BigDecimal valor;
+
     @ManyToOne
     @JoinColumn(name = "vendedor_id")
     private VendedorModel vendedor;
@@ -74,13 +77,20 @@ public class VendaModel implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        VendaModel venda = (VendaModel) o;
+        VendaModel that = (VendaModel) o;
 
-        return Objects.equals(id, venda.id);
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(dataVenda, that.dataVenda)) return false;
+        if (!Objects.equals(valor, that.valor)) return false;
+        return Objects.equals(vendedor, that.vendedor);
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (dataVenda != null ? dataVenda.hashCode() : 0);
+        result = 31 * result + (valor != null ? valor.hashCode() : 0);
+        result = 31 * result + (vendedor != null ? vendedor.hashCode() : 0);
+        return result;
     }
 }

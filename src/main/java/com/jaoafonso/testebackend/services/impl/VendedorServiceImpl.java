@@ -25,6 +25,10 @@ public class VendedorServiceImpl implements VendedorService {
 
     @Override
     public VendedorModel salvar(VendedorModel vendedor) {
+        if (vendedor.getNome().isBlank()) {
+            throw new RegraNegocioException("O nome do vendedor não pode estar vazio.");
+        }
+
         return vendedorRepository.save(vendedor);
     }
 
@@ -32,6 +36,8 @@ public class VendedorServiceImpl implements VendedorService {
     public List<VendedorDTO> listar(LocalDate dataInicial, LocalDate dataFinal) {
         if (dataFinal.isAfter(LocalDate.now()) || dataInicial.isAfter(LocalDate.now())) {
             throw new RegraNegocioException("Data inválida, não insira datas futuras.");
+        } else if (dataInicial.isAfter(dataFinal)) {
+            throw new RegraNegocioException("Data inválida, a data inicial não pode ser superior à data final.");
         }
 
         List<VendedorDTO> dtoList = new ArrayList<>();

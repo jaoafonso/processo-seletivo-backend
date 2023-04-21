@@ -25,7 +25,7 @@ public class VendaServiceImpl implements VendaService {
     @Override
     public VendaModel salvar(VendaDTO dto) {
         Long idVendedor = dto.getVendedor();
-        VendedorModel vendedor =vendedorRepository
+        VendedorModel vendedor = vendedorRepository
                 .findById(idVendedor)
                 .orElseThrow(() -> new RegraNegocioException("Codigo de vendedor inválido."));
 
@@ -34,8 +34,6 @@ public class VendaServiceImpl implements VendaService {
         venda.setValor(dto.getValor());
         venda.setDataVenda(LocalDate.now());
 
-        vendaRepository.save(venda);
-
-        return venda;
+        return vendaRepository.save(venda);
     }
 }
