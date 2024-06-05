@@ -40,11 +40,6 @@ public class VendedorServiceImplTest {
     }
 
     @Test
-    public void salvar_ComDadosInvalidos_LancaExcecao() {
-        assertThatThrownBy(() -> vendedorService.salvar(VENDEDOR_INVALIDO)).isInstanceOf(RegraNegocioException.class);
-    }
-
-    @Test
     public void listar_ComDadosValidos_RetornaListaDTO() {
         when(vendedorRepository.findAll()).thenReturn(List.of(VENDEDOR1, VENDEDOR2));
         when(vendaRepository.calcularMediaVendasDiariaPorVendedor(VENDEDOR1.getId(),

@@ -3,6 +3,10 @@ package com.jaoafonso.testebackend.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -10,7 +14,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Data
 @Entity
+@NoArgsConstructor
 @Table(name = "TB_VENDEDOR")
 public class VendedorModel implements Serializable {
 
@@ -30,49 +36,8 @@ public class VendedorModel implements Serializable {
     @JsonIgnore
     private Set<VendaModel> vendas = new HashSet<>();
 
-    public VendedorModel() {
-    }
-
     public VendedorModel(Long id, String nome) {
         this.id = id;
         this.nome = nome;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Set<VendaModel> getVendas() {
-        return vendas;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        VendedorModel that = (VendedorModel) o;
-
-        if (!Objects.equals(id, that.id)) return false;
-        return Objects.equals(nome, that.nome);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (nome != null ? nome.hashCode() : 0);
-        return result;
     }
 }

@@ -1,6 +1,11 @@
 package com.jaoafonso.testebackend.models;
 
+import com.jaoafonso.testebackend.rest.dtos.VendaDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,7 +13,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "TB_VENDA")
 public class VendaModel implements Serializable {
 
@@ -30,67 +39,11 @@ public class VendaModel implements Serializable {
     @JoinColumn(name = "vendedor_id", nullable = false)
     private VendedorModel vendedor;
 
-    public VendaModel() {
-    }
-
-    public VendaModel(Long id, LocalDate dataVenda, BigDecimal valor, VendedorModel vendedor) {
-        this.id = id;
-        this.dataVenda = dataVenda;
-        this.valor = valor;
-        this.vendedor = vendedor;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDataVenda() {
-        return dataVenda;
-    }
-
-    public void setDataVenda(LocalDate dataVenda) {
-        this.dataVenda = dataVenda;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public VendedorModel getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(VendedorModel vendedor) {
-        this.vendedor = vendedor;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        VendaModel that = (VendaModel) o;
-
-        if (!Objects.equals(id, that.id)) return false;
-        if (!Objects.equals(dataVenda, that.dataVenda)) return false;
-        if (!Objects.equals(valor, that.valor)) return false;
-        return Objects.equals(vendedor, that.vendedor);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (dataVenda != null ? dataVenda.hashCode() : 0);
-        result = 31 * result + (valor != null ? valor.hashCode() : 0);
-        result = 31 * result + (vendedor != null ? vendedor.hashCode() : 0);
-        return result;
+    public static VendaModel of(VendaDTO dto, VendedorModel vendedor) {
+        return VendaModel.builder()
+            .vendedor(vendedor)
+            .valor(dto.getValor())
+            .dataVenda(LocalDate.now())
+            .build();
     }
 }
